@@ -20,10 +20,11 @@ const useStyles = makeStyles(theme => ({
     width: 200
   }
 }));
+const initialValue = {username: '', email: ''};
 
 export default function SignupForm() {
   const classes = useStyles();
-  const [formValues, setFormValue] = useState({username: '', email: ''});
+  const [formValues, setFormValue] = useState(initialValue);
  
 
   const handleChanges = e => {
@@ -41,7 +42,7 @@ export default function SignupForm() {
 
   const clearForm = e => {
     e.preventDefault();
-    setFirstName(""); //this is to clear the form 
+    setFormValue(initialValue); //this is to clear the form 
   };
 
   return (
