@@ -23,10 +23,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignupForm() {
   const classes = useStyles();
-  const [firstName, setFirstName] = useState("");
+  const [formValues, setFormValue] = useState({username: '', email: ''});
+ 
 
   const handleChanges = e => {
-    setFirstName(e.target.value);
+   e.preventDefault();
+   console.log(e.target.name);
+   console.log(e.target.value);
+   setFormValue({...formValues, [e.target.name]: e.target.value}) // ..formValues creates a shallow copy of the formValues object, the next part updates a property (username) in the new object.
+   // the property name is taken from the e.target.name value (from the form input field) and its value is set to e.target.value (the value of the input field)
   };
 
   const handleSubmit = e => {
@@ -36,7 +41,7 @@ export default function SignupForm() {
 
   const clearForm = e => {
     e.preventDefault();
-    setFirstName("");
+    setFirstName(""); //this is to clear the form 
   };
 
   return (
@@ -46,10 +51,20 @@ export default function SignupForm() {
           <legend>Add New Client</legend>
           <TextField
             id="outlined-name"
-            label="First Name"
+            label="User Name"
             className={classes.textField}
-            name="firstName"
-            value={firstName}
+            name="username"
+            value={formValues.username}
+            onChange={handleChanges}
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-name"
+            label="Email"
+            className={classes.textField}
+            name="email"
+            value={formValues.email}
             onChange={handleChanges}
             margin="normal"
             variant="outlined"
