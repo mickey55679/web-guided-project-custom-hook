@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
+
 import Button from "../theme/Button";
 
 const useStyles = makeStyles(theme => ({
@@ -24,26 +25,10 @@ const initialValue = {username: '', email: ''};
 
 export default function SignupForm() {
   const classes = useStyles();
-  const [formValues, setFormValue] = useState(initialValue);
- 
-
-  const handleChanges = e => {
-   e.preventDefault();
-   console.log(e.target.name);
-   console.log(e.target.value);
-   setFormValue({...formValues, [e.target.name]: e.target.value}) // ..formValues creates a shallow copy of the formValues object, the next part updates a property (username) in the new object.
-   // the property name is taken from the e.target.name value (from the form input field) and its value is set to e.target.value (the value of the input field)
+  const callback = () => {
+    alert(`${values.username}, ${values.email}`);
   };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    alert(firstName);
-  };
-
-  const clearForm = e => {
-    e.preventDefault();
-    setFormValue(initialValue); //this is to clear the form 
-  };
+  const [values, clearForm, handleChanges, handleSubmit] = useForm(initialValue, callback);
 
   return (
     <div p={2} className="form">
@@ -55,7 +40,7 @@ export default function SignupForm() {
             label="User Name"
             className={classes.textField}
             name="username"
-            value={formValues.username}
+            value={values.username}
             onChange={handleChanges}
             margin="normal"
             variant="outlined"
@@ -65,7 +50,7 @@ export default function SignupForm() {
             label="Email"
             className={classes.textField}
             name="email"
-            value={formValues.email}
+            value={values.email}
             onChange={handleChanges}
             margin="normal"
             variant="outlined"
