@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { useForm } from "../hooks/useForm";
 
 
 import Button from "../theme/Button";
@@ -25,10 +26,12 @@ const initialValue = {username: '', email: ''};
 
 export default function SignupForm() {
   const classes = useStyles();
+
   const callback = () => {
     alert(`${values.username}, ${values.email}`);
   };
-  const [values, clearForm, handleChanges, handleSubmit] = useForm(initialValue, callback);
+  const [values, clearForm, handleChanges, handleSubmit] = useForm(
+    'signUpForm', initialValue, callback);
 
   return (
     <div p={2} className="form">
